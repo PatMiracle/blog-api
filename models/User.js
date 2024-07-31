@@ -1,48 +1,17 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema(
-  {
-    email: {
-      type: String,
-      required: true,
-      trim: true,
-      match: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-    },
-    name: {
-      first: {
-        type: String,
-        required: true,
-        lowercase: true,
-        minlength: 1,
-        trim: true,
-      },
-      last: {
-        type: String,
-        required: true,
-        lowercase: true,
-        minlength: 1,
-        trim: true,
-      },
-    },
-    username: {
-      type: String,
-      required: true,
-      lowercase: true,
-      minlength: 6,
-      unique: true,
-      trim: true,
-    },
-    password: {
-      type: String,
-      required: true,
-      minlength: 6,
-    },
-  },
-  { timestamps: true }
-);
+const userSchema = new mongoose.Schema({
+  email: { type: String, required: true, unique: true },
+  username: { type: String, required: true, minlength: 3, unique: true },
+  firstName: { type: String },
+  lastName: { type: String },
+  password: { type: String, required: true, minlength: 6 },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+});
 
 userSchema.virtual("fullName").get(() => {
-  return this.name.first + " " + this.name.last; //concatenate first & last names.
+  return this.firstName + this.lastName; //concatenate first & last names.
 });
 
 module.exports = mongoose.model("User", userSchema);
