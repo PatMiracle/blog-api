@@ -2,9 +2,12 @@ const createError = require("http-errors");
 const express = require("express");
 const logger = require("morgan");
 const compression = require("compression");
+const mongoose = require("mongoose");
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+const uri = process.env.MONGO_URI;
 
 app.use(compression());
 
@@ -29,4 +32,10 @@ app.use(function (err, req, res, next) {
   res.status(500).json({ error: "InternalServerError" });
 });
 
-app.listen(port, () => console.log(`server running at ${port}`));
+// connect to db and listen on port
+mongoose
+  .connect(uri)
+  .then(() => {
+    app.listen(port, () => console.log(`server running at ${port}`));
+  })
+  .catch((e) => console.log(e));

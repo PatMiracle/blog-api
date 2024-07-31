@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node --env-file=.env app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon --env-file=.env.development.local app.js"
   },
   "dependencies": {
     "compression": "^1.7.4",
