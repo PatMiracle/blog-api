@@ -44,3 +44,5 @@ const userSchema = new mongoose.Schema(
 userSchema.virtual("fullName").get(() => {
   return this.name.first + " " + this.name.last; //concatenate first & last names.
 });
+
+module.exports = mongoose.model("User", userSchema);
