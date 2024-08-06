@@ -4,9 +4,9 @@ Blog API built with Node.js and Express
 
 ### Todo
 
-- Create a .env and .env.development.local in the root folder.
+- Create a .env file in the root folder.
 
-- Create a mongodb collection to store data. Optionally creating one for development and one for production.
+- Create a mongodb collection to store data.
 
 ### Run App
 
@@ -19,5 +19,5 @@ npm run dev
 Production:
 
 ```sh
-npm start
+npm build && npm start
 ```
